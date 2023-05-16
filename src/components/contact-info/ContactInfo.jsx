@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 export default function ContactInfo() {
 
-  // useParems function from the react-router-dom library
+  // useParams function from the react-router-dom library
   // can be used to retrieve parameters from the URL 
   let { id } = useParams();
 
@@ -12,12 +12,9 @@ export default function ContactInfo() {
   const [info, setInfo] = useState();
 
   // API calls is made as soon as the component is rendered
+  // Get the details info of a selected contact by calling /contacts/id
+  // The result should update the state (info)  
   useEffect(() => {
-    fetch("/contacts/id")
-      .then(data => data.json())
-      .then(data => {
-        setInfo(data)
-      })
   }, [])
 
   // Need to check if the state info already fetched successfully the data or not
@@ -26,20 +23,16 @@ export default function ContactInfo() {
   if (info) {
     return (
 
+      /*
+        Write the HTML (JSX) to display the information about the selected contact
+      */
       <div>
-        <img src={info.image} />
-        <ul>
-          <li>Name: {info.wine}</li>
-          <li>Winery: {info.winery}</li>
-          <li>Location: {info.location}</li>
-        </ul>
       </div>
     )
   }
 
   else {
-    <p>Data is being fetched...</p>
+    return <p>Data is being fetched...</p>
   }
-
 
 }

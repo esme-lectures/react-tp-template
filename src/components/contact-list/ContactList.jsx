@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import ContactItem from './ContactItem';
-import { Link } from "react-router-dom";
 
 export default function ContactList() {
 
@@ -20,23 +18,19 @@ export default function ContactList() {
     // annonymous function passed as the first parameter will be executed once the component is rendered
     // It's usually a good place to make API calls.
     useEffect(() => {
-        fetch("/contacts")
-            .then(data => data.json())
-            .then(data => setContacts(data));
+
     }, []);
 
 
-    // Using an array.map() to map/transform a list of wine (data)
-    // to a list of <li><Link to={route}><ContactItem data={wine}/></Link></li>
+    // Using an array.map() to map/transform a list of contact (data)
+    // to a list of 
+    // <li> 
+    //      <Link to={route}><ContactItem data={contact}/>
+    //      </Link> 
+    //  </li>
     // This usually how we display lists of items in a React application
-    const items = contacts.map(wine => {
-        const id = wine.id;
-        const route = "/contact/" + id;
-        return (
-            <li>
-                <Link to={route}><ContactItem data={wine} /></Link>
-            </li>
-        );
+    const items = contacts.map(contact => {
+        return contact;
     });
 
     if (contacts.length > 0) {
@@ -52,6 +46,6 @@ export default function ContactList() {
     }
 
     else {
-        <p>Conversation are being fetched...</p>
+        return <p>The contact list are being fetched...</p>
     }
 }
